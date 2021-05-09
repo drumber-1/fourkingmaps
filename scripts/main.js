@@ -78,7 +78,7 @@ function onSearchEvent()
 {
     resetSearchBarError();
     var searchValue = document.getElementById("searchMain").value;
-    var sucess = search(searchValue);
+    var success = search(searchValue);
     
     if (!success)
         triggerSearchBarError();
