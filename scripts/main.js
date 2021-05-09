@@ -61,17 +61,24 @@ function triggerSearchBarError()
     window.setTimeout(resetSearchBarError, 800);
 }
 
-function onSearch()
+function search(searchTerm)
 {
-    resetSearchBarError();
-    var searchValue = document.getElementById("searchMain").value;
-    var searchTerms = searchValue.toLowerCase().split(".");
+    var searchTerms = searchTerm.toLowerCase().split(".");
 
     var success = false;
     if (searchTerms.length == 4)
         success = gotoWords(searchTerms[0], searchTerms[1], searchTerms[2], searchTerms[3]);
-    else if (searchTerms.length = 1)
+    else if (searchTerms.length == 1)
         success = gotoWords(searchTerms[0], searchTerms[0], searchTerms[0], searchTerms[0]);
+
+    return success;
+}
+
+function onSearchEvent()
+{
+    resetSearchBarError();
+    var searchValue = document.getElementById("searchMain").value;
+    var sucess = search(searchValue);
     
     if (!success)
         triggerSearchBarError();
@@ -83,9 +90,14 @@ $(function()
     {
         if(e.which == 13)
         {
-            onSearch();
+            onSearchEvent();
         }
     })
 })
 
 coolmap.on('click', onMapClickEvent);
+
+// Check if we have a position in the url and try and go there
+let params = new URLSearchParams(window.location.search)
+let input = params.get("fkm")
+search(input);
