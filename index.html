@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Four King Maps - Fucking good maps</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="shortcut icon" type="image/x-icon" href="img/crown.svg" />
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <link rel="stylesheet" href="styles/style.css">
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/">
+			<img src="img/crown.svg" alt="Four King Maps" />
+			<a class="navbar-brand" href="/">Four King Maps</a>
+		</a>
+
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="/">Map</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/what">What?</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="https://github.com/">Code</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="input-group">
+	<input type="search" id="searchMain" class="form-control" placeholder="Search swears" transition="background 2s"/>
+	<div class="input-group-btn">
+		<button class="btn btn-default" type="submit" onclick="onSearch();"><img src="img/search.svg" id="searchicon"></img></button>
+	</div>
+</div>
+
+<div id="coolmap"></div>
+<script src="scripts/bigNumber.js"></script>
+<script src="scripts/fkm.js"></script>
+<script src="scripts/main.js"></script>
+
+</body>
+
+</html> 

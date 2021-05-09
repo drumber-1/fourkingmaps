@@ -1,0 +1,30 @@
+#coolmap
+{
+    position: absolute;
+    top: 96px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 96px);
+}
+
+html body
+{
+    background-color: rgb(236, 236, 236);
+}
+
+.btn
+{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.navbar-nav
+{
+    flex-direction: row;
+}
+
+.nav-item
+{
+    padding-left: 10px;
+    padding-right: 10px;
+}
