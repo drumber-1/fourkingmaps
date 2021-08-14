@@ -10,7 +10,7 @@ L.tileLayer(tileUrl, {
     tileSize: 256,
     zoomOffset: 0
 }).addTo(coolmap);
-
+let found_you=false;
 var watch = navigator.geolocation.watchPosition(locationUpdate, locationUpdateFail, 
     {
         enableHighAccuracy: false,
