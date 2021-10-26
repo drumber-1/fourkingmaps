@@ -92,14 +92,14 @@ function triggerSearchBarError()
 
 function search(searchTerm)
 {
-    var searchTerms = searchTerm.toLowerCase().split(".");
-
     var success = false;
-    if (searchTerms.length == 4)
-        success = gotoWords(searchTerms[0], searchTerms[1], searchTerms[2], searchTerms[3]);
-    else if (searchTerms.length == 1)
-        success = gotoWords(searchTerms[0], searchTerms[0], searchTerms[0], searchTerms[0]);
-
+    if (searchTerm) {
+        var searchTerms = searchTerm.toLowerCase().split(".");
+        if (searchTerms.length == 4)
+            success = gotoWords(searchTerms[0], searchTerms[1], searchTerms[2], searchTerms[3]);
+        else if (searchTerms.length == 1)
+            success = gotoWords(searchTerms[0], searchTerms[0], searchTerms[0], searchTerms[0]);
+    }
     return success;
 }
 
