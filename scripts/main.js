@@ -11,7 +11,7 @@ L.tileLayer(tileUrl, {
     zoomOffset: 0
 }).addTo(coolmap);
 
-L.control.locate({drawMarker: false}).addTo(coolmap);
+L.control.locate({drawMarker: false, showCompass: false}).addTo(coolmap);
 
 function onLocationFound(e)
 {
