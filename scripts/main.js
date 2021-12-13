@@ -10,35 +10,28 @@ L.tileLayer(tileUrl, {
     tileSize: 256,
     zoomOffset: 0
 }).addTo(coolmap);
-let found_you=false;
-var watch = navigator.geolocation.watchPosition(locationUpdate, locationUpdateFail, 
-{
-    enableHighAccuracy: false,
-    maximumAge: 30000,
-    timeout: 27000
-});
-    
-function locationUpdate(position) {
-    if (position.coords.accuracy <10000) {
-        var me = L.circle([position.coords.latitude, position.coords.longitude], 
-            {
-                color: 'green',
-                fillColor: '#0f3',
-                fillOpacity: 0.10,
-                radius: position.coords.accuracy
-            }).addTo(coolmap);
-    if (!found_you) {
-        coolmap.setView([position.coords.latitude, position.coords.longitude], 14);
 
-        found_you=true;
-        clickHere(L.latLng(position.coords.latitude, position.coords.longitude));
-        }
-    }
-}
-function locationUpdateFail(error) 
+// Geolocation
+var geoLocationCircle = L.circle([0,0], {radius: 0, color: "green", fillColor: "#0f3", fillOpacity: 0.1});
+coolmap.locate({setView: true, mazZoom: 13})
+
+function onLocationFound(e)
 {
-    console.log("location fail: ", error);
+    geoLocationCircle.remove();
+    geoLocationCircle.setRadius(e.accuracy);
+    geoLocationCircle.setLatLng(e.latlng);
+    geoLocationCircle.addTo(coolmap);
+
+    clickHere(e.latlng);
 }
+
+function onLocationError(e)
+{
+    alert(e.message);
+}
+
+coolmap.on("locationfound", onLocationFound)
+coolmap.on('locationerror', onLocationError);
 
 var grid = new Grid(L.latLngBounds(L.latLng(49.41, -10.97), L.latLng(61.29, 2.25)), L.point(235647, 440825));
 var num_words = 568; // Size of 4-d word grid, this^4 needs to be larger than grid size, word list must have at least this many words
