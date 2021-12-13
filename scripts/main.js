@@ -10,6 +10,35 @@ L.tileLayer(tileUrl, {
     tileSize: 256,
     zoomOffset: 0
 }).addTo(coolmap);
+let found_you=false;
+var watch = navigator.geolocation.watchPosition(locationUpdate, locationUpdateFail, 
+    {
+        enableHighAccuracy: false,
+        maximumAge: 30000,
+        timeout: 27000
+    });
+    
+    function locationUpdate(position) {
+        if (position.coords.accuracy <10000) {
+            var me = L.circle([position.coords.latitude, position.coords.longitude], 
+                {
+                    color: 'green',
+                    fillColor: '#0f3',
+                    fillOpacity: 0.10,
+                    radius: position.coords.accuracy
+                }).addTo(coolmap);
+        if (!found_you) {
+            coolmap.setView([position.coords.latitude, position.coords.longitude], 14);
+
+            found_you=true;
+            clickHere(L.latLng(position.coords.latitude, position.coords.longitude));
+            }
+        }
+    }
+    function locationUpdateFail(error) 
+    {
+        console.log("location fail: ", error);
+    }
 
 var grid = new Grid(L.latLngBounds(L.latLng(49.41, -10.97), L.latLng(61.29, 2.25)), L.point(235647, 440825));
 var num_words = 568; // Size of 4-d word grid, this^4 needs to be larger than grid size, word list must have at least this many words
@@ -63,14 +92,14 @@ function triggerSearchBarError()
 
 function search(searchTerm)
 {
-    var searchTerms = searchTerm.toLowerCase().split(".");
-
     var success = false;
-    if (searchTerms.length == 4)
-        success = gotoWords(searchTerms[0], searchTerms[1], searchTerms[2], searchTerms[3]);
-    else if (searchTerms.length == 1)
-        success = gotoWords(searchTerms[0], searchTerms[0], searchTerms[0], searchTerms[0]);
-
+    if (searchTerm) {
+        var searchTerms = searchTerm.toLowerCase().split(".");
+        if (searchTerms.length == 4)
+            success = gotoWords(searchTerms[0], searchTerms[1], searchTerms[2], searchTerms[3]);
+        else if (searchTerms.length == 1)
+            success = gotoWords(searchTerms[0], searchTerms[0], searchTerms[0], searchTerms[0]);
+    }
     return success;
 }
 
