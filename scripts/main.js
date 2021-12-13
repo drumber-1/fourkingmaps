@@ -11,27 +11,13 @@ L.tileLayer(tileUrl, {
     zoomOffset: 0
 }).addTo(coolmap);
 
-// Geolocation
-var geoLocationCircle = L.circle([0,0], {radius: 0, color: "green", fillColor: "#0f3", fillOpacity: 0.1});
-coolmap.locate({setView: true, mazZoom: 13})
+L.control.locate({drawMarker: false}).addTo(coolmap);
 
 function onLocationFound(e)
 {
-    geoLocationCircle.remove();
-    geoLocationCircle.setRadius(e.accuracy);
-    geoLocationCircle.setLatLng(e.latlng);
-    geoLocationCircle.addTo(coolmap);
-
     clickHere(e.latlng);
 }
-
-function onLocationError(e)
-{
-    alert(e.message);
-}
-
-coolmap.on("locationfound", onLocationFound)
-coolmap.on('locationerror', onLocationError);
+coolmap.on("locationfound", onLocationFound);
 
 var grid = new Grid(L.latLngBounds(L.latLng(49.41, -10.97), L.latLng(61.29, 2.25)), L.point(235647, 440825));
 var num_words = 568; // Size of 4-d word grid, this^4 needs to be larger than grid size, word list must have at least this many words
