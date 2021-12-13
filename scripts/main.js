@@ -11,6 +11,14 @@ L.tileLayer(tileUrl, {
     zoomOffset: 0
 }).addTo(coolmap);
 
+L.control.locate({drawMarker: false, showCompass: false}).addTo(coolmap);
+
+function onLocationFound(e)
+{
+    clickHere(e.latlng);
+}
+coolmap.on("locationfound", onLocationFound);
+
 var grid = new Grid(L.latLngBounds(L.latLng(49.41, -10.97), L.latLng(61.29, 2.25)), L.point(235647, 440825));
 var num_words = 568; // Size of 4-d word grid, this^4 needs to be larger than grid size, word list must have at least this many words
 var random_factor = 62327453281; // Needs to be coprime with num_words^4, small numbers will create less apparent randomness
@@ -63,14 +71,15 @@ function triggerSearchBarError()
 
 function search(searchTerm)
 {
-    var searchTerms = searchTerm.toLowerCase().split(".");
-
     var success = false;
-    if (searchTerms.length == 4)
-        success = gotoWords(searchTerms[0], searchTerms[1], searchTerms[2], searchTerms[3]);
-    else if (searchTerms.length == 1)
-        success = gotoWords(searchTerms[0], searchTerms[0], searchTerms[0], searchTerms[0]);
-
+    if (searchTerm)
+    {
+        var searchTerms = searchTerm.toLowerCase().split(".");
+        if (searchTerms.length == 4)
+            success = gotoWords(searchTerms[0], searchTerms[1], searchTerms[2], searchTerms[3]);
+        else if (searchTerms.length == 1)
+            success = gotoWords(searchTerms[0], searchTerms[0], searchTerms[0], searchTerms[0]);
+    }
     return success;
 }
 
